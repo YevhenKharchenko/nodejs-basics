@@ -1,6 +1,8 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import fs from 'node:fs/promises';
+import path from 'path';
 
 import { env } from './utils/env.js';
 import { getAllStudents, getStudentById } from './services/students.js';
@@ -25,6 +27,17 @@ export const startServer = () => {
     res.json({
       message: 'Hello world!',
     });
+  });
+
+  app.get('/home', async (req, res) => {
+    // try {
+    //   const html = await fs.readFile('src/index.html', 'utf-8');
+    //   res.send(html);
+    // } catch (e) {
+    //   console.error(e);
+    // }
+    const html = path.join(path.resolve('src', 'index.html'));
+    res.sendFile(html);
   });
 
   app.get('/students', async (req, res) => {
