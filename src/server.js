@@ -5,7 +5,11 @@ import fs from 'node:fs/promises';
 import path from 'path';
 
 import { env } from './utils/env.js';
-import { getAllStudents, getStudentById } from './services/students.js';
+import {
+  getAllStudents,
+  getStudentById,
+  addStudent,
+} from './services/students.js';
 
 const PORT = Number(env('PORT', '3000'));
 
@@ -29,15 +33,18 @@ export const startServer = () => {
     });
   });
 
-  app.get('/home', async (req, res) => {
-    // try {
-    //   const html = await fs.readFile('src/index.html', 'utf-8');
-    //   res.send(html);
-    // } catch (e) {
-    //   console.error(e);
-    // }
-    const html = path.join(path.resolve('src', 'index.html'));
+  app.get('/home', (req, res) => {
+    const html = path.join(path.resolve('src', 'views', 'index.html'));
     res.sendFile(html);
+  });
+
+  app.get('/about', async (req, res) => {
+    try {
+      const html = await fs.readFile('src/views/about.html', 'utf-8');
+      res.send(html);
+    } catch (e) {
+      console.error(e);
+    }
   });
 
   app.get('/students', async (req, res) => {

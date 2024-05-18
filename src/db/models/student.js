@@ -24,6 +24,8 @@ const studentsSchema = new Schema(
       required: true,
       default: false,
     },
+    createdAt: Number,
+    updatedAt: Number,
   },
   {
     timestamps: true,
