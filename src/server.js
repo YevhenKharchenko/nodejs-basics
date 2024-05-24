@@ -27,6 +27,8 @@ export const startServer = () => {
     }),
   );
 
+  app.use(express.static('src/public'));
+
   app.get('/', (req, res) => {
     res.json({
       message: 'Hello world!',
@@ -36,15 +38,6 @@ export const startServer = () => {
   app.get('/home', (req, res) => {
     const html = path.join(path.resolve('src', 'views', 'index.html'));
     res.sendFile(html);
-  });
-
-  app.get('/about', async (req, res) => {
-    try {
-      const html = await fs.readFile('src/views/about.html', 'utf-8');
-      res.send(html);
-    } catch (e) {
-      console.error(e);
-    }
   });
 
   app.get('/students', async (req, res) => {
