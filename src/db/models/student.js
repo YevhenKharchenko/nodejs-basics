@@ -24,8 +24,10 @@ const studentsSchema = new Schema(
       required: true,
       default: false,
     },
-    createdAt: Number,
-    updatedAt: Number,
+    parentId: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
   },
   {
     timestamps: true,
