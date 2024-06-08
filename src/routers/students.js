@@ -13,8 +13,11 @@ import {
   createStudentSchema,
   updateStudentSchema,
 } from '../validation/student.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
+
+router.use(authenticate);
 
 router.get('/', ctrlWrapper(getStudentsController));
 
