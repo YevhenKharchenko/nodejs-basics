@@ -33,8 +33,8 @@ router.get(
 router.post(
   '/',
   checkRoles(ROLES.TEACHER),
-  validateBody(createStudentSchema),
   upload.single('photo'),
+  validateBody(createStudentSchema),
   ctrlWrapper(createStudentController),
 );
 
@@ -47,16 +47,16 @@ router.delete(
 router.put(
   '/:studentId',
   checkRoles(ROLES.TEACHER),
-  validateBody(updateStudentSchema),
   upload.single('photo'),
+  validateBody(updateStudentSchema),
   ctrlWrapper(updateStudentController),
 );
 
 router.patch(
   '/:studentId',
   checkRoles(ROLES.TEACHER, ROLES.PARENT),
-  validateBody(updateStudentSchema),
   upload.single('photo'),
+  validateBody(updateStudentSchema),
   ctrlWrapper(patchStudentController),
 );
 
